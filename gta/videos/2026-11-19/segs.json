@@ -1,0 +1,61 @@
+{
+ "total": 28.099,
+ "segs": [
+  {
+   "i": 0,
+   "start": 0.15,
+   "end": 3.839,
+   "sub": "GTA VI ya salió… y si lo vas a jugar hoy, revisa esto primero",
+   "voice": "Ge te a seis ya salió. Y si lo vas a jugar hoy, revisa esto primero."
+  },
+  {
+   "i": 1,
+   "start": 4.139,
+   "end": 6.726,
+   "sub": "El tercer dato casi nadie lo sabe… y es GRATIS",
+   "voice": "El tercer dato casi nadie lo sabe, y es gratis."
+  },
+  {
+   "i": 2,
+   "start": 7.176,
+   "end": 9.265,
+   "sub": "1. Pesa hasta 212 GB",
+   "voice": "Uno: pesa hasta doscientos doce gigas."
+  },
+  {
+   "i": 3,
+   "start": 9.415,
+   "end": 11.906,
+   "sub": "Si tu consola está llena, toca borrar juegos",
+   "voice": "Si tu consola está llena, toca borrar juegos."
+  },
+  {
+   "i": 4,
+   "start": 12.356,
+   "end": 16.615,
+   "sub": "2. En la tienda de Xbox Colombia: $339.900",
+   "voice": "Dos: en la tienda de Equis box Colombia, cuesta casi trescientos cuarenta mil pesos."
+  },
+  {
+   "i": 5,
+   "start": 16.815,
+   "end": 20.105,
+   "sub": "¿Y en PC? Todavía sin fecha",
+   "voice": "Y si juegas en pe ce, toca esperar: todavía no tiene fecha."
+  },
+  {
+   "i": 6,
+   "start": 20.555,
+   "end": 25.989,
+   "sub": "3. Mapa de Leonida + póster GRATIS para imprimir en la página oficial",
+   "voice": "Tres: desde hoy, en la página oficial, puedes bajar gratis el mapa de Leonida y un póster para imprimir."
+  },
+  {
+   "i": 7,
+   "start": 26.589,
+   "end": 27.599,
+   "sub": "Sígueme para más",
+   "voice": "Sígueme para más."
+  }
+ ]
+}

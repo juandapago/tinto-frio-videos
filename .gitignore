@@ -6,3 +6,8 @@ pipeline/episodios/*/day1.js
 pipeline/episodios/*/chk/
 pipeline/episodios/*/ndur.json
 __pycache__/
+gta/videos/*/voz.wav
+gta/videos/*/mix.wav
+gta/videos/*/video.mp4
+gta/videos/*/*.png
+gta/videos/*/qa/
