@@ -1,0 +1,42 @@
+import json, re
+D=json.load(open('ndur.json')); cues=[]; at={}
+def say(k,t,who,cap,hl=(),**kw):
+    cues.append(dict(k=k,t=round(t,3),d=D[k],who=who,cap=cap,hl=[re.sub(r'[¡!¿?.,:…]','',w.lower()) for w in hl],**kw)); return t+D[k]
+e=say('h0',1.0,'BRAYAN',"Sí. Fue a propósito… y funcionó.",["propósito…","funcionó."],y=1640)
+at['recap']=round(e+.35,3)
+e=say('r0',at['recap']+.1,'BRAYAN',"Ustedes votaron el modo duro… ¿me va a salir bien?",["duro…","bien?"],y=1640)
+at['notif']=round(e+.15,3)
+e=say('n0',at['notif']+.35,'NARRADOR',"Y justo entonces… salió CTA VI.",["cta","vi."],y=1640)
+at['inv']=round(e+.4,3)
+e=say('b1',at['inv']+.2,'BRAYAN',"Yo tengo el juego. Tú tienes la consola. Mi casa, esta noche.",["juego.","consola.","casa,"],y=1090)
+e=say('s0',e+.25,'SOFI',"¿Me estás invitando?",["invitando?"],y=1090)
+e=say('b2',e+.25,'BRAYAN',"No. Te estoy avisando 😎",["avisando"],y=1090)
+at['acc']=round(e+.2,3)
+e=say('s1',at['acc'],'SOFI',"Ay, qué duro… Llevo la consola a las ocho.",["duro…","ocho."],y=1090)
+at['estres1']=round(at['acc']+1.0,3)
+at['chat']=round(e+.6,3)
+e=say('b3',at['chat']+5.0,'BRAYAN',"Kevin, ni se le ocurra.",["kevin,","ocurra."],y=1790)
+at['shower']=round(e+.5,3)
+at['higiene']=round(at['shower']+.4,3)
+e=say('n1',at['shower']+.6,'NARRADOR',"Primera ducha voluntaria del mes.",["primera","voluntaria"],y=1640)
+at['door']=round(e+.9,3)
+at['sofiin']=round(at['door']+.3,3)
+e=say('k0',at['door']+.9,'KEVIN',"Quiubo, primo. Yo cargo 😎",["cargo"],y=1060)
+e=say('b4',e+.2,'BRAYAN',"¿Usted cómo entró?",["entró?"],y=1060)
+e=say('m0',e+.2,'MAMÁ',"(desde la cocina) Yo le abrí, mijo.",["abrí,"],y=1060)
+at['upd']=round(e+.55,3)
+e=say('s2',at['upd']+1.3,'SOFI',"¿Seis horas?",["seis","horas?"],y=1640)
+at['estres2']=round(at['upd']+1.4,3)
+e=say('k1',e+.25,'KEVIN',"Y el cable es mío 😎",["cable"],y=1640)
+at['cable']=round(e-.6,3)
+e=say('n2',e+.3,'NARRADOR',"CTA VI había salido. Pero no tanto.",["no","tanto."],y=1640)
+at['last']=round(e+.5,3)
+e=say('b5',at['last']+.25,'BRAYAN',"Esto no fue a propósito.",["no","propósito."],y=1640)
+at['poll']=round(e+.45,3)
+e=say('b10',at['poll']+.3,'BRAYAN',"",[],noCap=True)
+at['end']=at['poll']
+total=round(e+1.5,2)
+ep=dict(day=8,cues=cues,at=at,total=total,clockKeys=[[0,0]],
+ options=[dict(k='A',t='Echar a Kevin',s='y quedarse sin cable 🔌'),dict(k='B',t='Que Kevin se quede',s='"yo cargo"… en plena cita 🧢')],
+ bars=[[at['estres1'],'ESTRÉS',.95,.60,''],[at['higiene'],'HIGIENE',.60,.95,'+35'],[at['estres2'],'ESTRÉS',.60,.90,'+30']])
+json.dump(ep,open('ep.json','w'),ensure_ascii=False); print(at,total)

@@ -1,0 +1,8 @@
+pipeline/episodios/*/n_*.wav
+pipeline/episodios/*/tmp.wav
+pipeline/episodios/*/soundtrack.*
+pipeline/episodios/*/st_norm.wav
+pipeline/episodios/*/day1.js
+pipeline/episodios/*/chk/
+pipeline/episodios/*/ndur.json
+__pycache__/
