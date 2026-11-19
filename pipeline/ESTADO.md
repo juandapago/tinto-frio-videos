@@ -36,3 +36,6 @@ Archivo vivo: cada ejecución diaria lo lee al empezar y lo actualiza al termina
 
 ## Aprendizajes de rendimiento
 - (Se completa con los datos de Metricool en cada ejecución: gancho a 3 s, retención, mejor hora.)
+- 2026-11-19 (Día 8 con <24 h): 852 vistas (los días 1–7 rondan 1.350–1.750 ya maduros), 70,1 % pasa los 3 s y 20,8 s de vista media (la mejor desde el Día 1). El gancho "Kevin ya estaba en la sala 😱" retiene bien; el cambio a votar comentando A/B aún no se puede juzgar.
+- Días 1–7: el pico de gancho fue el Día 7 (76,3 % pasa 3 s, "foto de pollito… y eso NO fue lo peor"): conviene abrir con la vergüenza concreta + "y eso no fue lo peor".
+- Ejecución del 2026-11-19: Día 9 NO producido; la ejecución programada no tuvo navegador para contar los votos A/B del Día 8.
