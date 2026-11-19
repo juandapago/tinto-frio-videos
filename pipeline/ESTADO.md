@@ -4,7 +4,7 @@ Archivo vivo: cada ejecución diaria lo lee al empezar y lo actualiza al termina
 
 ## Último episodio publicado
 - **Día:** 9 ("Eché a Kevin")
-- **Programado:** 2026-11-19 19:00 (America/Bogota) en Instagram (Reel), TikTok y YouTube Shorts.
+- **Programado:** 2026-11-19 19:00 (America/Bogota), Metricool post id 434856523, en Instagram (Reel), TikTok y YouTube Shorts.
 - **Encuesta abierta:** A = "Abrirle a Kevin" (pizza gratis… y primo en la cita) · B = "Escaparse con Sofi" (y dejar a Kevin con la consola).
 - **Barras al final:** ESTRÉS 55 % · PLATA $0 · HIGIENE 95 %.
 
