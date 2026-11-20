@@ -1,0 +1,35 @@
+import json, re
+D=json.load(open('ndur.json')); cues=[]; at={}
+def say(k,t,who,cap,hl=(),**kw):
+    cues.append(dict(k=k,t=round(t,3),d=D[k],who=who,cap=cap,hl=[re.sub(r'[¡!¿?.,:…]','',w.lower()) for w in hl],**kw)); return t+D[k]
+e=say('h0',0.6,'BRAYAN',"Me escapé con Sofi… con cero pesos en el bolsillo.",["escapé","cero","pesos"],y=1640)
+at['recap']=round(e+.3,3)
+e=say('r0',at['recap']+.1,'BRAYAN',"Ustedes votaron escaparnos… ¿pero a dónde lleva uno a alguien sin plata?",["escaparnos…","plata?"],y=1640)
+at['door']=round(e+.35,3)
+e=say('k0',at['door']+.9,'KEVIN',"¡Primo! ¿Y la pizza? 🍕",["pizza?"],y=1060)
+e=say('s0',e+.3,'SOFI',"Ese primo está muy cansón.",["cansón."],y=1060)
+at['run']=round(e+.2,3)
+at['chat']=round(at['run']+1.6,3)
+at['shop']=round(at['chat']+5.6,3)
+e=say('b1',at['shop']+.5,'BRAYAN',"Dos helados, por favor…",["helados,"],y=1640)
+at['pocket']=round(e+.3,3)
+e=say('b2',at['pocket']+.6,'BRAYAN',"Sofi… se me quedó la billetera. Y la plata. Y todo.",["billetera.","plata."],y=1640)
+at['plata']=round(at['pocket']+.9,3)
+e=say('s1',e+.3,'SOFI',"Tranquilo. Hoy pago yo… otra vez.",["pago","otra"],y=1640)
+e=say('b3',e+.3,'BRAYAN',"Segunda cita… y otra vez paga ella.",["segunda","paga"],y=1640)
+at['estres']=round(e-.6,3)
+at['meanw']=round(e+.5,3)
+e=say('n0',at['meanw']+.2,'NARRADOR',"Mientras tanto, en la casa de Brayan…",["mientras","casa"],y=1300)
+at['done']=round(e+.1,3)
+e=say('k1',at['done']+.8,'KEVIN',"Ya bajó, primo. Le creé un personaje: Brayan Pelón 😎",["bajó,","pelón"],y=1300)
+at['pelon']=round(e-1.2,3)
+at['last']=round(e+.5,3)
+e=say('s2',at['last']+.3,'SOFI',"Brayan… la próxima invitas tú, ¿sí?",["invitas"],y=1640)
+e=say('b4',e+.3,'BRAYAN',"Claro… ¿alguien sabe cómo se consigue plata en un día?",["plata","día?"],y=1640)
+at['poll']=round(e+.5,3)
+e=say('b10',at['poll']+.3,'BRAYAN',"",[],noCap=True)
+total=round(e+1.5,2)
+ep=dict(day=10,cues=cues,at=at,total=total,clockKeys=[[0,0]],
+ options=[dict(k='A',t='Trabajar donde Don Pepe',s='delantal y escoba en la tienda 🧹'),dict(k='B',t='Venderle su CTA VI a Kevin',s='plata rápida… pero sin juego 🎮')],
+ bars=[[at['plata'],'PLATA',0,0,'$0'],[at['estres'],'ESTRÉS',.55,.85,'+30']])
+json.dump(ep,open('ep.json','w'),ensure_ascii=False); print(at,total)
