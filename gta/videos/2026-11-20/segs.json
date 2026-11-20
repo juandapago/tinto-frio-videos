@@ -1,0 +1,61 @@
+{
+ "total": 33.32,
+ "segs": [
+  {
+   "i": 0,
+   "start": 0.15,
+   "end": 3.926,
+   "sub": "GTA VI vendió en UN día casi 3 veces más que GTA V",
+   "voice": "Ge te a seis vendió en un solo día casi tres veces más que Ge te a cinco."
+  },
+  {
+   "i": 1,
+   "start": 4.226,
+   "end": 6.691,
+   "sub": "Pero el último dato es el que más sorprende…",
+   "voice": "Pero el último dato es el que más sorprende."
+  },
+  {
+   "i": 2,
+   "start": 7.141,
+   "end": 12.249,
+   "sub": "Según Sensor Tower: más de 24 millones de copias el primer día",
+   "voice": "Según la firma Sénsor Táuer, en su primer día vendió más de veinticuatro millones de copias."
+  },
+  {
+   "i": 3,
+   "start": 12.449,
+   "end": 15.408,
+   "sub": "Unos 2.300 millones de dólares",
+   "voice": "Eso son unos dos mil trescientos millones de dólares."
+  },
+  {
+   "i": 4,
+   "start": 15.858,
+   "end": 20.296,
+   "sub": "GTA V en 2013: unos 800 millones el primer día",
+   "voice": "Ge te a cinco, en dos mil trece, hizo unos ochocientos millones en su primer día."
+  },
+  {
+   "i": 5,
+   "start": 20.746,
+   "end": 26.585,
+   "sub": "Lo loco: 19 millones eran RESERVAS… pagadas antes de ver una sola reseña",
+   "voice": "Y lo loco: diecinueve millones de esas copias eran reservas. Gente que pagó antes de ver una sola reseña."
+  },
+  {
+   "i": 6,
+   "start": 27.035,
+   "end": 30.565,
+   "sub": "Ojo: son estimaciones. Take-Two aún no da cifras oficiales",
+   "voice": "Ojo: son estimaciones. Teik Tu todavía no da cifras oficiales."
+  },
+  {
+   "i": 7,
+   "start": 30.965,
+   "end": 32.82,
+   "sub": "¿Tú ya lo tienes? Sígueme para más",
+   "voice": "¿Tú ya lo tienes? Sígueme para más."
+  }
+ ]
+}
