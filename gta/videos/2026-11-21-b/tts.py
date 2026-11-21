@@ -23,8 +23,8 @@ LINES = [
      "Y en Kick, 1,5 millones más", 0.40),
     ("En total: casi ocho millones de personas viendo el mismo juego al mismo tiempo, según Strims Charts.",
      "TOTAL: casi 8 millones al mismo tiempo (según Streams Charts)", 0.40),
-    ("Es casi tanta gente como la que vive en Bogotá.",
-     "Casi tanta gente como la que vive en Bogotá", 0.45),
+    ("Más del doble del viejo récord de Twitch.",
+     "Más del DOBLE del viejo récord de Twitch", 0.45),
     ("¿Tú lo viste en vivo? Sígueme para más.",
      "¿Tú lo viste en vivo? Sígueme para más", 0.50),
 ]

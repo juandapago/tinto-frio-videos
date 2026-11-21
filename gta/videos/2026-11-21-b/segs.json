@@ -1,5 +1,5 @@
 {
- "total": 33.412,
+ "total": 33.102,
  "segs": [
   {
    "i": 0,
@@ -46,14 +46,14 @@
   {
    "i": 6,
    "start": 27.844,
-   "end": 30.484,
-   "sub": "Casi tanta gente como la que vive en Bogotá",
-   "voice": "Es casi tanta gente como la que vive en Bogotá."
+   "end": 30.175,
+   "sub": "Más del DOBLE del viejo récord de Twitch",
+   "voice": "Más del doble del viejo récord de Twitch."
   },
   {
    "i": 7,
-   "start": 30.934,
-   "end": 32.912,
+   "start": 30.625,
+   "end": 32.602,
    "sub": "¿Tú lo viste en vivo? Sígueme para más",
    "voice": "¿Tú lo viste en vivo? Sígueme para más."
   }

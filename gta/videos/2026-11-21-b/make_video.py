@@ -320,6 +320,8 @@ def scene_promesa(img, t):
         rrect(d, (cx - w_, cy - h_ / 1.3, cx + w_, cy + h_ / 1.3), 30, fill=(90, 60, 10), outline=YEL, width=8)
         f = F(int(260 * p) + 1, "Black"); tw, th, b = tsize("?", f)
         d.text((cx - tw / 2 - b[0], cy - th / 2 - b[1]), "?", font=f, fill=YEL)
+    c = pop(t, t0 + 1.4, 0.25)
+    if c > 0: chip(img, "ESPERA EL ÚLTIMO NÚMERO", 540, 1120, c * (1 + 0.04 * math.sin(t * 8)), bg=(60, 10, 40), border=PINK, size=48)
 
 def hbar(d, y, frac, col, label, val, p):
     x0, x1 = 140, 940
@@ -340,6 +342,8 @@ def scene_ant(img, t):
     hbar(d, 880, 1.0, PINK, "GTA VI · 2026", "3,31 M", prog(t, t0 + 1.8, 1.0))
     s = pop(t, STAMP_ANT, 0.18)
     if s > 0: paste_c(img, SP["rec"], 760, 1110, s * 0.8, rot=-6)
+    c = pop(t, STAMP_ANT + 1.0, 0.25)
+    if c > 0: chip(img, "+200.000 PERSONAS", 540, 1240, c, bg=(10, 60, 30), fg=GRN, border=GRN, size=42)
 
 def stack(img, t, n_show, t0s):
     d = ImageDraw.Draw(img)
@@ -358,12 +362,14 @@ def stack(img, t, n_show, t0s):
             d.rounded_rectangle((150, ly, 200, ly + 50), 10, fill=c)
             d.text((230, ly - 2), n, font=fl, fill=WHITE)
             vs = f"{v:.2f}".replace(".", ",") + " M"
-            tw, th, b = tsize(vs, fl); d.text((930 - tw, ly - 2), vs, font=fl, fill=YEL)
+            tw, th, b = tsize(vs, fl); d.text((900 - tw, ly - 2), vs, font=fl, fill=YEL)
         x += w_
 
 def scene_yt(img, t):
     title(img, "Y NO SOLO TWITCH", t, T["yt"], y=360, size=84, glow=PINK)
     stack(img, t, 2, [T["yt"] - 10, BOX_T[0]])
+    c = pop(t, T["yt"] + 2.3, 0.25)
+    if c > 0: chip(img, "+3,21 M EN YOUTUBE", 540, 1100, c * (1 + 0.04 * math.sin(t * 8)), bg=(60, 40, 0), fg=YEL, border=YEL, size=46)
 
 def scene_kick(img, t):
     title(img, "Y NO SOLO TWITCH", t, T["yt"] - 10, y=360, size=84, glow=PINK)
@@ -377,23 +383,27 @@ def scene_total(img, t):
     d = ImageDraw.Draw(img)
     eye_people(d, t, 900, 20, (230, 200, 255), t0 + 0.6)
     s = pop(t, STAMP_TOT, 0.18)
-    if s > 0: paste_c(img, SP["rec"], 540, 1180, s * (1 + 0.5 * max(0, 1 - prog(t, STAMP_TOT, 0.1))), rot=-6)
+    if s > 0 and t < STAMP_TOT + 1.6: paste_c(img, SP["rec"], 540, 1180, s * (1 + 0.5 * max(0, 1 - prog(t, STAMP_TOT, 0.1))), rot=-6)
+    c = pop(t, STAMP_TOT + 1.6, 0.25)
+    if c > 0: chip(img, "FUENTE: STREAMS CHARTS", 540, 1180, c, bg=(30, 12, 52), fg=CYAN, border=CYAN, size=44)
 
 def scene_bog(img, t):
     t0 = T["bog"]
-    title(img, "≈ TODO BOGOTÁ", t, t0, y=360, size=100, color=YEL, glow=(150, 100, 0))
+    title(img, "MÁS DEL DOBLE", t, t0, y=360, size=100, color=YEL, glow=(150, 100, 0))
     d = ImageDraw.Draw(img)
-    r = random.Random(5)
-    for i in range(14):
-        p = ease_out(prog(t, EST_T + i * 0.05, 0.4))
-        w_ = r.randint(50, 70); h_ = r.randint(180, 460) * p
-        x = 130 + i * 60
-        if h_ > 2:
-            d.rectangle((x, 1150 - h_, x + w_, 1150), fill=(40, 20, 80), outline=CYAN, width=3)
-            for wy in range(int(1150 - h_) + 20, 1140, 40):
-                d.rectangle((x + 12, wy, x + 22, wy + 14), fill=YEL if (wy + i) % 3 else (90, 70, 30))
-    c = pop(t, t0 + 1.3, 0.25)
-    if c > 0: chip(img, "7,9 M DE PERSONAS", 540, 620, c, bg=(10, 60, 30), fg=GRN, border=GRN, size=50)
+    base = 1150
+    for i, (lab, v, col, tt) in enumerate([("LoL 2022", 3.11, (120, 120, 160), t0 + 0.2), ("GTA VI total", 7.91, PINK, t0 + 0.7)]):
+        p = ease_out(prog(t, tt, 0.6))
+        h_ = 560 * v / 7.91 * p
+        x = 260 + i * 330
+        if h_ > 2: rrect(d, (x, base - h_, x + 220, base), 18, fill=col, outline=WHITE, width=4)
+        fl = F(40, "Black"); tw, th, bb = tsize(lab, fl)
+        d.text((x + 110 - tw / 2, base + 20), lab, font=fl, fill=WHITE, stroke_width=2, stroke_fill=(0, 0, 0))
+        if p > 0.3:
+            vs = f"{v:.2f}".replace(".", ",") + " M"; fv = F(54, "Black"); tw, th, bb = tsize(vs, fv)
+            d.text((x + 110 - tw / 2, base - h_ - 75), vs, font=fv, fill=YEL, stroke_width=3, stroke_fill=(0, 0, 0))
+    c = pop(t, t0 + 1.4, 0.25)
+    if c > 0: chip(img, "x2,5", 370, 640, c * (1 + 0.05 * math.sin(t * 8)), bg=(10, 60, 30), fg=GRN, border=GRN, size=64)
 
 def flash_alpha(t, events, dur=0.22):
     a = 0
@@ -423,7 +433,7 @@ def render(t):
     img.paste(layer, (dx, dy), layer)
     sub = current_sub(t)
     if sub: caption(img, sub)
-    fa = flash_alpha(t, [STAMP1, STAMP_TOT] + SCENE_CHANGES)
+    fa = flash_alpha(t, [STAMP1, T["ant"], T["total"]])
     if fa > 0:
         img.alpha_composite(Image.new("RGBA", (W, H), (255, 255, 255, int(110 * fa))))
     return img.convert("RGB")
