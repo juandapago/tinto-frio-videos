@@ -1,0 +1,61 @@
+{
+ "total": 33.412,
+ "segs": [
+  {
+   "i": 0,
+   "start": 0.15,
+   "end": 5.637,
+   "sub": "GTA VI rompió el récord de Twitch: 3,3 millones viéndolo AL MISMO TIEMPO",
+   "voice": "Ge te a seis rompió el récord de Twitch: tres coma tres millones de personas viéndolo al mismo tiempo."
+  },
+  {
+   "i": 1,
+   "start": 5.937,
+   "end": 8.703,
+   "sub": "Y eso que solo es Twitch… espera al último número",
+   "voice": "Y eso que solo es Twitch. Espera al último número."
+  },
+  {
+   "i": 2,
+   "start": 9.103,
+   "end": 14.787,
+   "sub": "Récord anterior: League of Legends, 3,1 millones (final mundial 2022)",
+   "voice": "El récord anterior era de Lig of Léyends: tres coma un millones, en la final del mundial de dos mil veintidós."
+  },
+  {
+   "i": 3,
+   "start": 15.137,
+   "end": 19.444,
+   "sub": "Pero en YouTube hubo otros 3,2 millones",
+   "voice": "Pero no solo lo vieron en Twitch. En YouTube hubo otros tres coma dos millones."
+  },
+  {
+   "i": 4,
+   "start": 19.644,
+   "end": 21.834,
+   "sub": "Y en Kick, 1,5 millones más",
+   "voice": "Y en Kik, uno coma cinco millones más."
+  },
+  {
+   "i": 5,
+   "start": 22.234,
+   "end": 27.444,
+   "sub": "TOTAL: casi 8 millones al mismo tiempo (según Streams Charts)",
+   "voice": "En total: casi ocho millones de personas viendo el mismo juego al mismo tiempo, según Strims Charts."
+  },
+  {
+   "i": 6,
+   "start": 27.844,
+   "end": 30.484,
+   "sub": "Casi tanta gente como la que vive en Bogotá",
+   "voice": "Es casi tanta gente como la que vive en Bogotá."
+  },
+  {
+   "i": 7,
+   "start": 30.934,
+   "end": 32.912,
+   "sub": "¿Tú lo viste en vivo? Sígueme para más",
+   "voice": "¿Tú lo viste en vivo? Sígueme para más."
+  }
+ ]
+}
