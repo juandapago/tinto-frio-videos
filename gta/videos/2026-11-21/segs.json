@@ -1,0 +1,61 @@
+{
+ "total": 36.441,
+ "segs": [
+  {
+   "i": 0,
+   "start": 0.15,
+   "end": 5.49,
+   "sub": "Ayer dijimos: GTA VI hizo unos 2.300 millones en su primer día",
+   "voice": "Ayer te dijimos que Ge te a seis vendió unos dos mil trescientos millones de dólares en su primer día."
+  },
+  {
+   "i": 1,
+   "start": 5.79,
+   "end": 8.929,
+   "sub": "Nos quedamos cortos… y el último dato es todavía más loco",
+   "voice": "Nos quedamos cortos. Y el último dato es todavía más loco."
+  },
+  {
+   "i": 2,
+   "start": 9.379,
+   "end": 14.688,
+   "sub": "Cifra OFICIAL de Take-Two: 32,5 millones de copias antes de salir",
+   "voice": "Teik Tu ya dio la cifra oficial: treinta y dos millones y medio de copias vendidas antes de salir."
+  },
+  {
+   "i": 3,
+   "start": 14.888,
+   "end": 18.697,
+   "sub": "Primer día: 3.790 millones de dólares",
+   "voice": "Y en su primer día: tres mil setecientos noventa millones de dólares."
+  },
+  {
+   "i": 4,
+   "start": 19.147,
+   "end": 21.987,
+   "sub": "Casi 1.500 millones más de lo estimado",
+   "voice": "Casi mil quinientos millones más de lo que se estimaba."
+  },
+  {
+   "i": 5,
+   "start": 22.438,
+   "end": 28.022,
+   "sub": "Según Take-Two: el lanzamiento MÁS GRANDE del entretenimiento en la historia",
+   "voice": "Según Teik Tu, es el lanzamiento de entretenimiento más grande de la historia. Ni el cine ha hecho algo así."
+  },
+  {
+   "i": 6,
+   "start": 28.472,
+   "end": 33.685,
+   "sub": "Lo más loco: 99 en Metacritic… el juego mejor calificado de la historia",
+   "voice": "Y lo más loco: noventa y nueve en Metacrític. El juego mejor calificado de todos los tiempos."
+  },
+  {
+   "i": 7,
+   "start": 34.085,
+   "end": 35.941,
+   "sub": "¿Tú ya lo tienes? Sígueme para más",
+   "voice": "¿Tú ya lo tienes? Sígueme para más."
+  }
+ ]
+}
