@@ -1,0 +1,47 @@
+{
+ "total": 28.103,
+ "segs": [
+  {
+   "i": 0,
+   "start": 0.15,
+   "end": 5.508,
+   "sub": "GTA VI ya habría vendido 44,9 millones de copias. En solo 4 días",
+   "voice": "Ge te a seis ya habría vendido cuarenta y cuatro coma nueve millones de copias. En solo cuatro días."
+  },
+  {
+   "i": 1,
+   "start": 5.808,
+   "end": 9.572,
+   "sub": "Es una estimación de Alinea Analytics. Y el último dato es el más loco",
+   "voice": "Es una estimación de Alinea Analytics. Y el último dato es el más loco."
+  },
+  {
+   "i": 2,
+   "start": 9.972,
+   "end": 15.632,
+   "sub": "33,7 millones serían de PS5. 11,2 millones, de Xbox",
+   "voice": "Treinta y tres coma siete millones serían de PlayStation cinco. Once coma dos millones, de Equis box."
+  },
+  {
+   "i": 3,
+   "start": 15.982,
+   "end": 20.04,
+   "sub": "Y solo el domingo, casi 41 millones de personas entraron a jugar",
+   "voice": "Y solo el domingo, casi cuarenta y un millones de personas entraron a jugar."
+  },
+  {
+   "i": 4,
+   "start": 20.44,
+   "end": 24.953,
+   "sub": "Pero lo más loco: casi 9 millones ya le metieron más de 20 horas. En 4 días",
+   "voice": "Pero lo más loco: casi nueve millones ya le metieron más de veinte horas. En cuatro días."
+  },
+  {
+   "i": 5,
+   "start": 25.403,
+   "end": 27.603,
+   "sub": "¿Tú cuántas horas llevas? Sígueme para más",
+   "voice": "¿Tú cuántas horas llevas? Sígueme para más."
+  }
+ ]
+}
