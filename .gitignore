@@ -11,3 +11,10 @@ gta/videos/*/mix.wav
 gta/videos/*/video.mp4
 gta/videos/*/*.png
 gta/videos/*/qa/
+robos/node_modules/
+robos/*/n_*.wav
+robos/*/tmp.wav
+robos/*/soundtrack.wav
+robos/*/st_norm.wav
+robos/*/robos.html
+robos/*/chk/

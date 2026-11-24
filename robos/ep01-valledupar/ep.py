@@ -1,0 +1,30 @@
+import json, re
+D=json.load(open('ndur.json')); cues=[]; at={}
+def say(k,t,cap,hl=(),y=1420):
+    cues.append(dict(k=k,t=round(t,3),d=D[k],cap=cap,hl=[re.sub(r'[¡!¿?.,:…$]','',w.lower()) for w in hl],y=y)); return t+D[k]
+e=say('n0',.15,"Iban a robar $3.000 millones de pesos… y se llevaron $24.000.",["3.000","24.000"])
+at['h24']=round(.15+D['n0']*.62,3)
+at['s1']=round(e+.35,3)
+e=say('n1',at['s1']+.15,"Valledupar, 1994. Su camión se varó camino al banco… y la gente que pasaba les ayudó a empujarlo.",["varó","empujarlo."])
+at['push']=round(e-1.6,3)
+at['s2']=round(e+.35,3)
+e=say('n2',at['s2']+.15,"Atrás, escondidos, venían 14 hombres. Entraron al Banco de la República un domingo, a las 6 de la mañana.",["14","hombres.","domingo,"])
+at['tarp']=round(at['s2']+1.2,3)
+at['s3']=round(e+.35,3)
+e=say('n3',at['s3']+.15,"Con sopletes cortaron puerta tras puerta hasta la bóveda. 21 horas adentro.",["sopletes","21","horas"])
+at['hrs']=round(e-1.6,3)
+at['s4']=round(e+.35,3)
+e=say('n4',at['s4']+.15,"Salieron con más de $24.000 millones de pesos. Unas cuatro toneladas de billetes.",["24.000","toneladas"])
+at['ton']=round(e-1.8,3)
+at['s5']=round(e+.35,3)
+e=say('n5',at['s5']+.15,"Pero muchos billetes eran nuevos, y el banco tenía sus números de serie. Los sacó de circulación. Los apodaron “los vallenatos”… y quedaron convertidos en papel.",["serie.","circulación.","vallenatos”…","papel."])
+c5=at['s5']+.15; d5=D['n5']
+at['stampOut']=round(c5+d5*.47,3); at['vall']=round(c5+d5*.62,3); at['paper']=round(c5+d5*.86,3)
+at['s6']=round(e+.35,3)
+e=say('n6',at['s6']+.15,"Identificaron a 26 implicados. ¿Y el cerebro del plan? Según El Heraldo, terminó pobre… trabajando como vigilante.",["26","cerebro","vigilante."])
+at['s7']=round(at['s6']+.15+D['n6']*.30,3)
+at['guard']=round(e-1.4,3)
+at['poll']=round(e+.45,3)
+e=say('n7',at['poll']+.25,"¿Qué robo cuento mañana? Comenta A o B… y sígueme para más.",["a","b…","sígueme"])
+total=round(e+1.3,2)
+json.dump(dict(cues=cues,at=at,total=total),open('ep.json','w'),ensure_ascii=False); print(at,total)
