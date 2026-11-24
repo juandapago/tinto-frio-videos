@@ -139,7 +139,7 @@ function billTex(serial, gray) {
     x.fillStyle = gray ? '#6d6d66' : '#b3262a'; x.font = '700 58px Oswald'; x.fillText('No. ' + serial, 60, 410);
   });
 }
-const BILLS = 36, bills = []; for (let i = 0; i < BILLS; i++) { const s = String(68200001 + Math.floor(rnd(i + 40) * 399999)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); const m = new THREE.Mesh(new THREE.PlaneGeometry(2.0, .94), new THREE.MeshToonMaterial({ map: billTex(s, false), gradientMap: grad, side: THREE.DoubleSide })); m.userData.gray = billTex(s, true); SE.add(m); bills.push(m); }
+const BILLS = 36, bills = []; for (let i = 0; i < BILLS; i++) { const s = String(68200001 + Math.floor(rnd(i + 40) * 399999)).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); const m = new THREE.Mesh(new THREE.PlaneGeometry(2.0, .94), new THREE.MeshToonMaterial({ map: billTex(s, false), gradientMap: grad, side: THREE.DoubleSide })); m.userData.gray = billTex(s, true); m.userData.color = m.material.map; SE.add(m); bills.push(m); }
 const hero = new THREE.Mesh(new THREE.BoxGeometry(2.9, 1.36, .03), [0, 0, 0, 0, new THREE.MeshToonMaterial({ map: billTex('68.200.001', false), gradientMap: grad }), toon(0xcfe3c6)].map(m => m || toon(0xcfe3c6)));
 hero.userData.color = hero.material[4].map; hero.userData.gray = billTex('68.200.001', true); SE.add(hero);
 
@@ -174,14 +174,14 @@ function caption(t) {
   const c = EP.cues.find(c => t >= c.t && t < c.t + c.d + .15); if (!c) return;
   const words = c.cap.split(' '), lens = words.map(w => w.length + 2), tot = lens.reduce((a, b) => a + b, 0); let acc = 0; const ends = lens.map(l => (acc += l) / tot);
   const prog = clamp((t - c.t) / c.d), cur = ends.findIndex(e => e >= prog);
-  ctx.font = `700 60px ${F}`; const maxW = 880, lines = [[]]; let lw = 0;
+  ctx.font = `700 60px ${F}`; const maxW = 760, CX = 510, lines = [[]]; let lw = 0;
   words.forEach((w, i) => { const ww = ctx.measureText(w + ' ').width; if (lw + ww > maxW && lines[lines.length - 1].length) { lines.push([]); lw = 0; } lines[lines.length - 1].push(i); lw += ww; });
   // ventana de 2 líneas alrededor de la palabra actual (máx. 3 líneas)
   let li0 = Math.max(0, lines.findIndex(l => l.includes(Math.max(cur, 0))) - 1); const show = lines.slice(li0, li0 + 3);
   const lh = 74, y0 = c.y - (show.length - 1) * lh / 2; const wid = show.map(l => ctx.measureText(l.map(i => words[i]).join(' ')).width); const bw = Math.max(...wid) + 76, bh = show.length * lh + 36;
-  ctx.fillStyle = 'rgba(12,10,22,.74)'; rr(540 - bw / 2, y0 - lh / 2 - 18, bw, bh, 26); ctx.fill();
+  ctx.fillStyle = 'rgba(12,10,22,.74)'; rr(CX - bw / 2, y0 - lh / 2 - 18, bw, bh, 26); ctx.fill();
   ctx.textBaseline = 'middle';
-  show.forEach((l, li) => { let x = 540 - wid[li] / 2; l.forEach(i => { const w = words[i], key = c.hl.includes(w.toLowerCase().replace(/[¡!¿?.,:…$“”]/g, '')), isCur = i === cur; ctx.save(); ctx.textAlign = 'left'; ctx.font = `700 60px ${F}`; ctx.globalAlpha = i <= cur || cur < 0 ? 1 : .5;
+  show.forEach((l, li) => { let x = CX - wid[li] / 2; l.forEach(i => { const w = words[i], key = c.hl.includes(w.toLowerCase().replace(/[¡!¿?.,:…$“”]/g, '')), isCur = i === cur; ctx.save(); ctx.textAlign = 'left'; ctx.font = `700 60px ${F}`; ctx.globalAlpha = i <= cur || cur < 0 ? 1 : .5;
     outlined(w, x, y0 + li * lh, isCur || key ? YL : CR, 10); ctx.restore(); x += ctx.measureText(w + ' ').width; }); });
 }
 function vignette() { const g = ctx.createRadialGradient(540, 900, 520, 540, 960, 1320); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,.42)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); }
@@ -195,21 +195,23 @@ function renderAt(t) {
     scene = SD; const d = t + 1.2;
     bundles.forEach((b, i) => { const td = i * .012, fall = clamp((d - td) / .25), [x, y, z, ry] = targets[i]; b.visible = d > td; b.position.set(x, lerp(7.5, y, fall * fall), z); b.rotation.set(0, ry + (1 - fall) * 2, (1 - fall) * .8); });
     cigBoxes.forEach(b => b.visible = false);
-    orbit(t, 0, A.s1, [0, 1.0, .3], 7.2, 3.4, -.9, .5, 50);
+    orbit(t, -2, A.s1 + 2, [0, 1.0, .3], lerp(7.8, 6.3, clamp(t / A.s1)), 3.4, -1.3, .9, 50);
   } else if (t < A.s2) {
     // CALLE: camión varado echando humo, la gente lo empuja; cámara acompaña
     scene = SA; const k = clamp((t - A.s1) / (A.s2 - A.s1 - .2)), z = lerp(9.5, .3, eout(k)); truckA.visible = true; truckA.rotation.y = Math.PI / 2; truckA.position.set(7.9, 0, z); truckA.userData.wheels.forEach(w => w.rotation.y = z / .46);
     pushers.forEach((p, i) => { p.rotation.order = 'YXZ'; p.position.set(7.9 - 1.2 + i * .8, 0, z + 2.95 + (i % 2) * .2); p.rotation.y = Math.PI; p.rotation.x = .3; p.userData.arms.forEach(a => a.rotation.x = -1.35); walk(p, t + i, 11 * (1 - k * .5), .6); });
     smoke.forEach((s, i) => { const P = 1.6, age = (t + i / smoke.length * P) % P; s.visible = true; s.position.set(7.9 + (rnd(i) - .5) * .6, 1.5 + age * 1.6, z - 3.1 - age * .4); s.scale.setScalar(.4 + age * .9); s.material.opacity = .85 * (1 - age / P); });
     guard.position.set(99, 0, 0); flash.intensity = 0; lampA.intensity = 30;
-    move(t, A.s1, A.s2, [2.0, 2.4, z + 9.5], [3.6, 4.2, 10.5], [7.9, 1.6, z - 1], [7.4, 2.6, -1.5], 50, k => k);
+    if (t < A.push) move(t, A.s1, A.push, [2.0, 2.4, z + 9.5], [3.2, 3.6, z + 8.5], [7.9, 1.6, z - 1], [7.6, 2.0, z - 1.2], 50, k => k);
+    else move(t, A.push, A.s2, [13.8, 1.1, z + 5.8], [12.8, 1.4, z + 4.4], [8.2, 1.4, z + 1.8], [8.0, 1.5, z + .8], 50, k => k);
   } else if (t < A.s3) {
     // GARAJE: se levanta la carpa y saltan los ladrones
     scene = SB; const d = t - A.s2, up = eout(clamp((t - A.tarp) / .5));
     truckB.userData.tarpG.position.y = 1.1 + up * 3.2; truckB.userData.tarpG.position.x = -2.25 - up * 1.5; truckB.userData.tarpG.rotation.z = -up * .5;
     thieves.forEach((th, i) => { const t0 = A.tarp + .35 + i * .22, k = clamp((t - t0) / .45), hop = Math.sin(k * Math.PI) * 1.2; const sx = (i % 3 - 1) * .7, ex = (i - 2.5) * 1.15;
-      th.position.set(lerp(sx, ex, k), lerp(1.1, 0, k) + hop * (k < 1 ? 1 : 0), lerp(-.6 + (i % 3) * .6, 3.4 + (i % 2) * .9, k)); th.visible = t > A.tarp + .1; th.rotation.y = 0; th.userData.arms.forEach((a, j) => a.rotation.x = k < 1 ? -2.4 : -.3 + Math.sin(t * 3 + i + j) * .1); if (k >= 1) walk(th, 0, 0, 0); });
-    move(t, A.s2, A.s3, [0, 2.4, 11.5], [1.6, 2.9, 7.6], [0, 1.6, -1], [0, 1.6, 0], 50);
+      th.position.set(lerp(sx, ex, k), lerp(1.1, 0, k) + hop * (k < 1 ? 1 : 0), lerp(-.6 + (i % 3) * .6, 3.4 + (i % 2) * .9, k)); th.visible = t > A.tarp + .1; th.rotation.y = 0; th.userData.arms.forEach((a, j) => a.rotation.x = k < 1 ? -2.4 : Math.sin(t * 7 + i * 1.3 + j * Math.PI) * .45);
+      if (k >= 1) { const wk = Math.max(0, t - t0 - .45); th.position.z += wk * .36; th.position.y = Math.abs(Math.sin(t * 7 + i * 1.3)) * .06; th.rotation.y = Math.sin(t * 1.3 + i) * .12; walk(th, t + i * .2, 7, .5); } });
+    move(t, A.s2, A.s3, [0, 2.4, 11.5], [2.2, 1.6, 10.6], [0, 1.6, -1], [0, 1.5, 4.2], 50, k => k * (2 - k));
   } else if (t < A.s4) {
     // BÓVEDA: sopletes; cámara orbita la puerta
     scene = SC; const d = t - A.s3, prog = clamp((d - .3) / (A.s4 - A.s3 - .6));
@@ -224,14 +226,14 @@ function renderAt(t) {
   } else if (t < A.s5) {
     // PLATA: grúa que sube mientras cae la pila y aparecen las cajas de cigarrillos
     scene = SD; const d = t - A.s4;
-    bundles.forEach((b, i) => { const td = .25 + i * .026, fall = clamp((d - td) / .3), [x, y, z, ry] = targets[i]; b.visible = d > td; b.position.set(x, lerp(7.5, y, fall * fall), z); b.rotation.set(0, ry + (1 - fall) * 2, (1 - fall) * .8); });
+    bundles.forEach((b, i) => { const td = .02 + i * .026, fall = clamp((d - td) / .3), [x, y, z, ry] = targets[i]; b.visible = d > td; b.position.set(x, lerp(7.5, y, fall * fall), z); b.rotation.set(0, ry + (1 - fall) * 2, (1 - fall) * .8); });
     cigBoxes.forEach((b, i) => { const k = eback(clamp((d - 2.2 - i * .15) / .3)); b.visible = k > 0; b.scale.setScalar(Math.max(.001, k)); });
-    move(t, A.s4, A.s5, [1.2, 1.0, 6.2], [3.4, 6.0, 7.0], [0, .9, 0], [-.4, .8, 0], 46);
+    move(t, A.s4, A.s5, [1.2, 1.4, 6.2], [3.4, 6.0, 7.0], [0, 2.4, 0], [-.4, .8, 0], 46);
   } else if (t < A.s6) {
     // BILLETES MARCADOS
     scene = SE; const d = t - A.s5, gray = t >= A.paper, crum = clamp((t - A.paper) / .6);
-    bills.forEach((m, i) => { const sp = .35 + rnd(i) * .5, y = 9 - ((d * sp * 2.2 + rnd(i + 7) * 12) % 14); m.position.set((rnd(i + 1) - .5) * 9, y, -3 - rnd(i + 2) * 7); m.rotation.set(d * (1 + rnd(i + 3)) + i, d * (.8 + rnd(i + 4)) + i * 2, d * .5); if (gray && !m.userData.isGray) { m.material.map = m.userData.gray; m.material.needsUpdate = true; m.userData.isGray = true; } if (!gray && m.userData.isGray) { m.material.map = billTex('0', false); m.userData.isGray = false; } m.scale.set(1, 1 - crum * .7, 1); });
-    hero.material[4].map = gray ? hero.userData.gray : hero.userData.color; hero.material[4].needsUpdate = true;
+    bills.forEach((m, i) => { const sp = .35 + rnd(i) * .5, y = 9 - ((d * sp * 2.2 + rnd(i + 7) * 12) % 14); m.position.set((rnd(i + 1) - .5) * 9, y, -3 - rnd(i + 2) * 7); m.rotation.set(d * (1 + rnd(i + 3)) + i, d * (.8 + rnd(i + 4)) + i * 2, d * .5); if (gray && !m.userData.isGray) { m.material.map = m.userData.gray; m.material.needsUpdate = true; m.userData.isGray = true; } if (!gray && m.userData.isGray) { m.material.map = m.userData.color; m.userData.isGray = false; } m.scale.set(1, 1 - crum * .7, 1); });
+    hero.visible = true; hero.material[4].map = gray ? hero.userData.gray : hero.userData.color; hero.material[4].needsUpdate = true;
     hero.position.set(0, 3.1 + Math.sin(t * 1.4) * .08, 0); hero.rotation.set(-.12 + Math.sin(t * .9) * .05, Math.sin(t * .7) * .18, .04); hero.scale.set(1 - crum * .25, 1 - crum * .55, 1);
     move(t, A.s5, A.s6, [0, 3.1, 8.6], [.3, 3.2, 7.2], [0, 3.0, 0], [0, 3.0, 0], 46);
   } else if (t < A.s7) {
@@ -242,17 +244,20 @@ function renderAt(t) {
   } else if (t < A.poll) {
     // EL VIGILANTE: el banco de noche, push-in hacia él
     scene = SA; truckA.visible = false; pushers.forEach(p => p.position.set(99, 0, 0)); smoke.forEach(s => s.visible = false);
-    guard.position.set(7.0, 0, -2.6); guard.rotation.y = .35; guard.userData.arms[1].rotation.x = -1.1; guard.userData.arms[0].rotation.x = 0; walk(guard, 0, 0, 0);
-    flash.intensity = 80; flash.position.set(7.4, 1.8, -2.1); flash.target.position.set(9.5, 0, 2.5); lampA.intensity = 30;
-    move(t, A.s7, A.poll, [3.8, 3.0, 9.5], [6.0, 2.4, 2.2], [6.8, 2.2, -2.5], [7.0, 2.0, -2.6], 46);
+    const gd = t - A.s7, dir = Math.cos(gd * 1.15), gx = 7.0 + Math.sin(gd * 1.15) * .85;
+    guard.position.set(gx, 0, -2.6); guard.rotation.y = .35 + dir * .85; guard.userData.arms[1].rotation.x = -1.1; guard.userData.arms[0].rotation.x = Math.sin(t * 7) * .35 * Math.abs(dir); walk(guard, t, 7, .45 * Math.abs(dir));
+    flash.intensity = 80; flash.position.set(gx + .4, 1.8, -2.1); flash.target.position.set(gx + 2.2 + Math.sin(gd * 2.1) * 2.2, 0, 2.5); lampA.intensity = 30;
+    move(t, A.s7, A.poll, [3.8, 3.0, 9.5], [6.0, 2.3, 2.0], [6.8, 2.2, -2.5], [gx, 1.9, -2.6], 46, k => k * (2 - k));
   } else {
-    scene = SC; sparks.forEach(s => s.visible = false); cutDots.forEach(d => d.visible = true); torchL.intensity = 0; redL.intensity = 12;
-    orbit(t, A.poll, A.poll + 8, [0, 2.3, 0], 8.6, 2.6, -.35, -.1, 46);
+    // ENCUESTA: lluvia continua de billetes (a color) detrás de las tarjetas
+    scene = SE; hero.visible = false; const d = t - A.poll + 6;
+    bills.forEach((m, i) => { const sp = .35 + rnd(i) * .5, y = 9 - ((d * sp * 2.2 + rnd(i + 7) * 12) % 14); m.position.set((rnd(i + 1) - .5) * 9, y, -3 - rnd(i + 2) * 7); m.rotation.set(d * (1 + rnd(i + 3)) + i, d * (.8 + rnd(i + 4)) + i * 2, d * .5); m.scale.set(1, 1, 1); if (m.userData.isGray) { m.material.map = m.userData.color; m.material.needsUpdate = true; m.userData.isGray = false; } });
+    move(t, A.poll, A.poll + 6, [-.6, 3.0, 8.6], [.6, 3.4, 7.6], [0, 3.0, 0], [0, 3.3, 0], 46, k => k);
   }
   renderer.render(scene, cam);
-  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.filter = t >= A.poll ? 'blur(10px) brightness(.55)' : 'none'; ctx.drawImage(renderer.domElement, 0, 0, W, H); ctx.filter = 'none';
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.filter = t >= A.poll ? 'blur(6px) brightness(.5)' : 'none'; ctx.drawImage(renderer.domElement, 0, 0, W, H); ctx.filter = 'none';
   // transición "látigo": barrido horizontal corto en cada corte
-  for (const tt of [A.s1, A.s2, A.s3, A.s4, A.s5, A.s6, A.s7, A.poll]) { const dd = t - tt; if (dd >= 0 && dd < .16) { const k = 1 - dd / .16; ctx.globalAlpha = .35 * k; for (let j = 1; j <= 4; j++) ctx.drawImage(renderer.domElement, -j * 70 * k, 0, W, H); ctx.globalAlpha = 1; } }
+  for (const tt of [A.s1, A.push, A.s2, A.s3, A.s4, A.s5, A.s6, A.s7, A.poll]) { const dd = t - tt; if (dd >= 0 && dd < .16) { const k = 1 - dd / .16; ctx.globalAlpha = .35 * k; for (let j = 1; j <= 4; j++) ctx.drawImage(renderer.domElement, -j * 70 * k, 0, W, H); ctx.globalAlpha = 1; } }
   vignette();
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   // ---- textos por plano (títulos con centro en y 330–600, nada importante bajo y 1600) ----
@@ -271,7 +276,7 @@ function renderAt(t) {
     const hrs = Math.min(21, Math.floor(clamp((t - A.s3) / (A.s4 - A.s3 - .4)) * 21)); plate([['⏱️ ' + String(hrs).padStart(2, '0') + ' H ADENTRO', 74, YL]], 380, 1);
     if (t > A.hrs) stamp('21 HORAS EN EL BANCO', 540, 540, RD, -.03, t - A.hrs, 62);
   } else if (t < A.s5) {
-    const k = clamp((t - A.s4 - .3) / 3.4), val = Math.round(eout(k) * 24000);
+    const k = clamp((t - A.s4 - .05) / 3.2), val = Math.round(eout(k) * 24000);
     plate([['SE LLEVARON', 46, CR], [money(val) + ' MILLONES', 92, GN]], 410, 1);
     if (t > A.ton) stamp('≈ 4 TONELADAS 💵', 540, 610, RD, -.03, t - A.ton, 64);
   } else if (t < A.s6) {
@@ -287,11 +292,11 @@ function renderAt(t) {
   } else {
     const d = t - A.poll; ctx.font = `700 86px ${F}`; outlined('¿QUÉ ROBO SIGUE?', 540, 380, CR, 16);
     [['A', 'EL TÚNEL DEL BANCO CENTRAL', 'Brasil · 2005', '#ff8a3d'], ['B', 'EL ROBO DEL MUSEO GARDNER', 'Estados Unidos · 1990', '#3d8bff']].forEach(([k, a, b, col], i) => {
-      const s = eback(clamp((d - .2 - i * .25) / .35)); if (s <= 0) return; ctx.save(); ctx.translate(540, 640 + i * 290); ctx.scale(s, s);
+      const s = eback(clamp((d - .2 - i * .25) / .35)); if (s <= 0) return; ctx.save(); const pu = 1 + .04 * Math.max(0, Math.sin(d * 4.2 + i * Math.PI)); ctx.translate(540, 640 + i * 290); ctx.rotate(Math.sin(d * 2.1 + i * 2) * .015); ctx.scale(s * pu, s * pu);
       ctx.fillStyle = 'rgba(0,0,0,.35)'; rr(-412, -112, 840, 240, 30); ctx.fill(); ctx.fillStyle = CR; rr(-420, -120, 840, 240, 30); ctx.fill(); ctx.lineWidth = 8; ctx.strokeStyle = '#1a1220'; rr(-420, -120, 840, 240, 30); ctx.stroke();
       ctx.fillStyle = col; rr(-395, -95, 170, 190, 26); ctx.fill(); ctx.stroke(); ctx.fillStyle = '#1a1220'; ctx.font = `700 130px ${F}`; ctx.fillText(k, -310, 8);
       ctx.textAlign = 'left'; ctx.font = `700 50px ${F}`; ctx.fillText(a, -195, -28, 590); ctx.font = `600 42px ${F}`; ctx.fillStyle = '#6b5a4e'; ctx.fillText(b, -195, 42); ctx.restore(); });
-    const k = clamp((d - .9) / .3); ctx.globalAlpha = k; ctx.font = `700 70px ${F}`; outlined('COMENTA  A  o  B 💬', 540, 1260, YL, 14); ctx.font = `700 50px ${F}`; outlined('SÍGUEME PARA MÁS ROBOS', 540, 1350, CR, 10); ctx.globalAlpha = 1;
+    const k = clamp((d - .9) / .3); ctx.globalAlpha = k; ctx.font = `700 70px ${F}`; const by = -Math.abs(Math.sin(d * 3.6)) * 16; outlined('COMENTA  A  o  B 💬', 540, 1260 + by, YL, 14); ctx.font = `700 50px ${F}`; outlined('SÍGUEME PARA MÁS ROBOS', 540, 1350, CR, 10); ctx.globalAlpha = 1;
   }
   if (t < A.poll) caption(t);
 }
