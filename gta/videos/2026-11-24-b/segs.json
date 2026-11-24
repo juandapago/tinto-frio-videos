@@ -1,0 +1,54 @@
+{
+ "total": 33.675,
+ "segs": [
+  {
+   "i": 0,
+   "start": 0.15,
+   "end": 4.678,
+   "sub": "Sony lo confirmó: GTA VI es el lanzamiento más grande en la historia de PlayStation",
+   "voice": "Sony lo confirmó: Ge te a seis es el lanzamiento más grande en la historia de PlayStation."
+  },
+  {
+   "i": 1,
+   "start": 4.978,
+   "end": 11.091,
+   "sub": "Lo jugaron más de 39 millones de personas en PS5. Y el último número es una locura",
+   "voice": "Lo jugaron más de treinta y nueve millones de personas en PlayStation cinco. Y el último número es una locura."
+  },
+  {
+   "i": 2,
+   "start": 11.491,
+   "end": 15.55,
+   "sub": "1: rompió el récord de jugadores conectados al mismo tiempo en PlayStation",
+   "voice": "Uno: rompió el récord de jugadores conectados al mismo tiempo en PlayStation."
+  },
+  {
+   "i": 3,
+   "start": 15.85,
+   "end": 20.213,
+   "sub": "2: en 7 de cada 10 PS5 nuevas, fue el primer juego que pusieron",
+   "voice": "Dos: en siete de cada diez PlayStation cinco nuevas, fue el primer juego que pusieron."
+  },
+  {
+   "i": 4,
+   "start": 20.513,
+   "end": 24.398,
+   "sub": "3: en promedio, cada jugador ya le metió 17,4 horas",
+   "voice": "Tres: en promedio, cada jugador ya le metió diecisiete coma cuatro horas."
+  },
+  {
+   "i": 5,
+   "start": 24.798,
+   "end": 30.484,
+   "sub": "Y en total: 683 millones de horas. Eso es casi 78.000 años jugando",
+   "voice": "Y en total: seiscientos ochenta y tres millones de horas. Eso es casi setenta y ocho mil años jugando."
+  },
+  {
+   "i": 6,
+   "start": 30.934,
+   "end": 33.175,
+   "sub": "¿Cuántas horas le llevas tú? Sígueme para más",
+   "voice": "¿Cuántas horas le llevas tú? Sígueme para más."
+  }
+ ]
+}
