@@ -89,7 +89,7 @@ const flash = new THREE.SpotLight(0xfff1c2, 0, 14, .32, .4, 1); SA.add(flash); S
 /* ---------- ESCENA B: el garaje (salen de la carpa) ---------- */
 const SB = new THREE.Scene(); SB.background = new THREE.Color(0x0e0d14); SB.fog = new THREE.Fog(0x0e0d14, 10, 24);
 SB.add(new THREE.HemisphereLight(0x7080b0, 0x201818, .5));
-const bulbB = new THREE.PointLight(0xffd59a, 40, 16, 1.4); bulbB.position.set(0, 5.5, 1); bulbB.castShadow = true; bulbB.shadow.bias = -0.004; SB.add(bulbB); const fillB = new THREE.DirectionalLight(0xb8c8ff, .9); fillB.position.set(2, 3, 12); SB.add(fillB);
+const bulbB = new THREE.PointLight(0xffd59a, 40, 16, 1.4); bulbB.position.set(0, 5.5, 1); bulbB.castShadow = true; bulbB.shadow.bias = -0.004; SB.add(bulbB); const bulbM = new THREE.Mesh(new THREE.SphereGeometry(.2, 12, 10), new THREE.MeshBasicMaterial({ color: 0xffe6a8 })); SB.add(bulbM); const fillB = new THREE.DirectionalLight(0xb8c8ff, .9); fillB.position.set(2, 3, 12); SB.add(fillB);
 const floorB = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), toon(0x3a3a44)); floorB.rotation.x = -Math.PI / 2; floorB.receiveShadow = true; SB.add(floorB);
 const wallB = new THREE.Mesh(new THREE.BoxGeometry(16, 8, .3), toon(0x4d5160)); wallB.position.set(0, 4, -5); SB.add(wallB);
 const truckB = makeTruck(); truckB.rotation.y = Math.PI / 2; truckB.position.set(0, 0, -.5); SB.add(truckB);
@@ -211,7 +211,9 @@ function renderAt(t) {
     thieves.forEach((th, i) => { const t0 = A.tarp + .35 + i * .22, k = clamp((t - t0) / .45), hop = Math.sin(k * Math.PI) * 1.2; const sx = (i % 3 - 1) * .7, ex = (i - 2.5) * 1.15;
       th.position.set(lerp(sx, ex, k), lerp(1.1, 0, k) + hop * (k < 1 ? 1 : 0), lerp(-.6 + (i % 3) * .6, 3.4 + (i % 2) * .9, k)); th.visible = t > A.tarp + .1; th.rotation.y = 0; th.userData.arms.forEach((a, j) => a.rotation.x = k < 1 ? -2.4 : Math.sin(t * 7 + i * 1.3 + j * Math.PI) * .45);
       if (k >= 1) { const wk = Math.max(0, t - t0 - .45); th.position.z += wk * .36; th.position.y = Math.abs(Math.sin(t * 7 + i * 1.3)) * .06; th.rotation.y = Math.sin(t * 1.3 + i) * .12; walk(th, t + i * .2, 7, .5); } });
-    move(t, A.s2, A.s3, [0, 2.4, 11.5], [2.2, 1.6, 10.6], [0, 1.6, -1], [0, 1.5, 4.2], 50, k => k * (2 - k));
+    bulbB.position.set(Math.sin(t * 2.4) * 1.4, 5.5 - Math.abs(Math.sin(t * 2.4)) * .25, 1 + Math.cos(t * 2.4) * .3); bulbM.position.copy(bulbB.position);
+    if (t < A.s2 + 4.1) move(t, A.s2, A.s2 + 4.1, [0, 2.4, 11.5], [2.4, 1.8, 10.4], [0, 1.6, -1], [0, 1.5, 3.6], 50, k => k);
+    else move(t, A.s2 + 4.1, A.s3, [1.8, .45, 10.4], [-1.4, .7, 9.2], [0, 2.1, 4], [0, 2.4, 4.6], 54, k => k);
   } else if (t < A.s4) {
     // BÓVEDA: sopletes; cámara orbita la puerta
     scene = SC; const d = t - A.s3, prog = clamp((d - .3) / (A.s4 - A.s3 - .6));
@@ -257,7 +259,7 @@ function renderAt(t) {
   renderer.render(scene, cam);
   ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.filter = t >= A.poll ? 'blur(6px) brightness(.5)' : 'none'; ctx.drawImage(renderer.domElement, 0, 0, W, H); ctx.filter = 'none';
   // transición "látigo": barrido horizontal corto en cada corte
-  for (const tt of [A.s1, A.push, A.s2, A.s3, A.s4, A.s5, A.s6, A.s7, A.poll]) { const dd = t - tt; if (dd >= 0 && dd < .16) { const k = 1 - dd / .16; ctx.globalAlpha = .35 * k; for (let j = 1; j <= 4; j++) ctx.drawImage(renderer.domElement, -j * 70 * k, 0, W, H); ctx.globalAlpha = 1; } }
+  for (const tt of [A.s1, A.push, A.s2, A.s2 + 4.1, A.s3, A.s4, A.s5, A.s6, A.s7, A.poll]) { const dd = t - tt; if (dd >= 0 && dd < .16) { const k = 1 - dd / .16; ctx.globalAlpha = .35 * k; for (let j = 1; j <= 4; j++) ctx.drawImage(renderer.domElement, -j * 70 * k, 0, W, H); ctx.globalAlpha = 1; } }
   vignette();
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   // ---- textos por plano (títulos con centro en y 330–600, nada importante bajo y 1600) ----
