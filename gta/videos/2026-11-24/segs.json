@@ -1,0 +1,54 @@
+{
+ "total": 28.409,
+ "segs": [
+  {
+   "i": 0,
+   "start": 0.15,
+   "end": 3.635,
+   "sub": "GTA VI ya tiene su primer parche. Y arregla 7 fallos",
+   "voice": "Ge te a seis ya tiene su primer parche. Y arregla siete fallos."
+  },
+  {
+   "i": 1,
+   "start": 3.935,
+   "end": 8.688,
+   "sub": "Pesa unos 600 MB en PS5. Y el último arreglo es el más raro",
+   "voice": "Pesa unos seiscientos megas en PlayStation cinco. Y el último arreglo es el más raro."
+  },
+  {
+   "i": 2,
+   "start": 9.088,
+   "end": 12.027,
+   "sub": "1: varios cierres. El juego se te podía cerrar solo",
+   "voice": "Uno: varios cierres. El juego se te podía cerrar solo."
+  },
+  {
+   "i": 3,
+   "start": 12.327,
+   "end": 17.948,
+   "sub": "2: llamadas que no entraban y trababan misiones de la historia. Y un clima que no cambiaba",
+   "voice": "Dos: llamadas que no entraban y te trababan misiones de la historia. Y un clima que no cambiaba en mucho rato."
+  },
+  {
+   "i": 4,
+   "start": 18.248,
+   "end": 21.138,
+   "sub": "3: a veces no te podías quitar el nivel de búsqueda",
+   "voice": "Tres: a veces no te podías quitar el nivel de búsqueda."
+  },
+  {
+   "i": 5,
+   "start": 21.538,
+   "end": 25.498,
+   "sub": "Y el más raro: en el gimnasio no se podía usar la barra de peso muerto",
+   "voice": "Y el más raro: en el gimnasio, no se podía usar la barra de peso muerto."
+  },
+  {
+   "i": 6,
+   "start": 25.948,
+   "end": 27.909,
+   "sub": "¿Cuál te tocó a ti? Sígueme para más",
+   "voice": "¿Cuál te tocó a ti? Sígueme para más."
+  }
+ ]
+}
